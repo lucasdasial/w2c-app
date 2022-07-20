@@ -1,10 +1,15 @@
-import React from "react";
-// 1. import `NativeBaseProvider` component
-import { NativeBaseProvider, Text, Box, StatusBar, Image } from "native-base";
+import React, { createContext, useState } from "react";
+import { NativeBaseProvider, StatusBar, Image } from "native-base";
 import { Routes } from "./src/routes";
+import { IWinner } from "./src/entities/winner";
 
 export default function App() {
-  // 2. Use at the root of your app
+  const [winners, setWinners] = useState<IWinner[]>([]);
+
+  //creating context
+  // const WinnersContext = createContext<IWinner[]>([]);
+  // const { Provider } = WinnersContext;
+
   return (
     <NativeBaseProvider>
       <StatusBar
@@ -13,6 +18,8 @@ export default function App() {
         barStyle={"light-content"}
       />
       <Routes />
+      {/* <Provider value={winners}> */}
+      {/* </Provider> */}
     </NativeBaseProvider>
   );
 }
