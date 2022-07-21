@@ -25,7 +25,7 @@ export function Header({ title, ...rest }: Props) {
       w="full"
       justifyContent={"space-between"}
       alignItems={"center"}
-      bg="#4f0e28"
+      bg="darkBlue.700"
       pb={6}
       pt={12}
       {...rest}
