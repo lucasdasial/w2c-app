@@ -4,19 +4,17 @@ import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { ChampionCard } from "../components/ChampionCard";
 import { IWinner } from "../entities/winner";
-import { ChatTeardropText } from "phosphor-react-native";
+import { Loading } from "../components/LoadingSpinner";
 
 export function Home() {
-  const [list, setList] = useState<IWinner[]>([
-    { country: "Who?", year: 2022 },
-  ]);
+  const [list, setList] = useState<IWinner[]>([]);
+  const [showLoading, setShowLoading] = useState<boolean>(true);
 
   const getWinners = async () => {
     const jsonValue = await AsyncStorage.getItem("@winners");
-
     const winners = jsonValue != null ? JSON.parse(jsonValue) : null;
-    console.log("oi");
-    setList((prev) => [...prev, ...winners]);
+    setShowLoading(false);
+    setList([{ country: "Who?", year: 2022 }, ...winners]);
   };
 
   useEffect(() => {
@@ -28,6 +26,7 @@ export function Home() {
       <Header title="Champions List" />
 
       <Box bg={"gray.200"} flex={1} w={"full"} p={6}>
+        {showLoading ? <Loading /> : null}
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 100 }}
