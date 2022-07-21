@@ -1,7 +1,7 @@
-<div style="display:flex;  flex-direction: column; justify-content:center; align-items:center">
-<img src="./assets/img/bola.png" width="72px">
-<h1 style="color:#06b6d4" >World cup champions - w2c</h1>
-</div>
+<p align="center">
+<img src="./assets/img/bola.png" width="72px" >
+</p>
+<h1 style="color:#06b6d4" align="center" >World cup champions - w2c</h1>
 
 ### Acess app : [expo page app](exp.host/@luccasalves/w2c?release-channel=default)
 
