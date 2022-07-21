@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { createContext, useState } from "react";
+import { NativeBaseProvider, StatusBar, Image } from "native-base";
+import { Routes } from "./src/routes";
+import { IWinner } from "./src/entities/winner";
 
 export default function App() {
+  const [winners, setWinners] = useState<IWinner[]>([]);
+
+  //creating context
+  // const WinnersContext = createContext<IWinner[]>([]);
+  // const { Provider } = WinnersContext;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <StatusBar
+        backgroundColor={"transparent"}
+        translucent
+        barStyle={"light-content"}
+      />
+      <Routes />
+      {/* <Provider value={winners}> */}
+      {/* </Provider> */}
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
