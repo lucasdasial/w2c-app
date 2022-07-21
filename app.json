@@ -1,31 +1,31 @@
 {
   "expo": {
-    "name": "word-cup-champions",
+    "name": "word cup champions",
     "slug": "w2c",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/img/bola-square.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/img/bola-square.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#002851"
+      "image": "./assets/splash.png",
+      "resizeMode": "contain"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.luccasalves.WorldCupChampions"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/img/bola-square.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/icon.png"
+      },
+      "package": "com.luccasalves.WorldCupChampions"
     },
     "web": {
-      "favicon": "./assets/img/cup.png"
+      "favicon": "./assets/icon.png"
     }
   }
 }

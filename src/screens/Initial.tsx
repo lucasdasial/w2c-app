@@ -1,42 +1,38 @@
 import { useNavigation } from "@react-navigation/native";
-import { VStack, Heading, Image, useTheme } from "native-base";
+import { VStack, Heading, Image, useTheme, useToast } from "native-base";
 import { useState } from "react";
-import { IGetToken, IGetWinners } from "../@types/api";
 import { Button } from "../components/Button";
 import { Loading } from "../components/LoadingSpinner";
-import { api } from "../plugins/axios";
+import { getWinnersData } from "../services/http/winners.services";
+
 import { setOnStoreData } from "../Utils/setAsyncStore";
 
 export function Initial() {
   const navigation = useNavigation();
   const [showLoading, setShowLoading] = useState<boolean>(false);
-
-  async function getData() {
-    setShowLoading(true);
-    //getting api token
-    await api
-      .post<IGetToken>("/login", {
-        email: "foo@bar.com",
-        password: "secret",
-      })
-      // getting data winners
-      .then(async (res) => {
-        const response = await api.get<IGetWinners>("/winners", {
-          headers: {
-            Authorization: `Bearer ${res.data.Token}`,
-          },
-        });
-
-        const jsonWinners = JSON.stringify(response.data.winners);
-        setOnStoreData("@winners", jsonWinners);
-        setShowLoading(false);
-      });
-  }
+  const toast = useToast();
 
   // need to turn into a promise to be able to navigate
   async function handleGo() {
-    await getData();
-    navigation.navigate("home");
+    setShowLoading(true);
+
+    try {
+      //this method return json string
+      const data = await getWinnersData();
+      setOnStoreData("@winners", data);
+      setShowLoading(false);
+      navigation.navigate("home");
+    } catch (error) {
+      setShowLoading(false);
+      toast.show({
+        description: "Unable to load data, please reload app again.",
+        title: "Ops!",
+        duration: 6000,
+        placement: "top",
+        color: "cyan.500",
+        bg: "amber.500",
+      });
+    }
   }
   return (
     <VStack
@@ -47,7 +43,7 @@ export function Initial() {
       p={8}
     >
       <Image
-        source={require("../../assets/img/bola-square.png")}
+        source={require("../../assets/img/bola.png")}
         alt="Alternate Text"
         size="xl"
         mb={8}
@@ -57,7 +53,7 @@ export function Initial() {
       <Heading color="cyan.300" fontSize={"3xl"} mt={2}>
         World cup Champions
       </Heading>
-      <Heading size={"xl"} color={"text.300"}>
+      <Heading size={"xl"} color={"text.300"} textAlign="center">
         Remeber all bigest winners
       </Heading>
 
