@@ -12,7 +12,7 @@
 
   or copy in your browser
 
-       exp://exp.host/@luccasalves/w2c?release-channel=default
+       https://expo.dev/@luccasalves/w2c?release-channel=default
 
 ### run app:
 
