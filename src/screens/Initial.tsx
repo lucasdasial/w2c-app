@@ -43,7 +43,7 @@ export function Initial() {
       p={8}
     >
       <Image
-        source={require("../../assets/img/bola-square.png")}
+        source={require("../../assets/img/bola.png")}
         alt="Alternate Text"
         size="xl"
         mb={8}
